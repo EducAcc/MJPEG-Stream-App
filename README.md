@@ -49,4 +49,8 @@
 * .NET SDK 8.0 или выше.
 
 ### Запуск
-Для запуска достаточно использовать `dotnet run`
+Клонировать репозиторий и перейти в папку с проектом
+```bash
+git clone https://github.com/EducAcc/MJPEG-Stream-App
+cd VideoTest
+dotnet run
