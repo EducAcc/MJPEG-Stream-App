@@ -49,8 +49,8 @@
 * .NET SDK 8.0 или выше.
 
 ### Запуск
-Клонировать репозиторий и перейти в папку с проектом
+Клонировать репозиторий и перейти в папку с проектом VideoTest.csproj
 ```bash
 git clone https://github.com/EducAcc/MJPEG-Stream-App
-cd VideoTest
+cd MJPEG-Stream-App\VideoTest
 dotnet run
