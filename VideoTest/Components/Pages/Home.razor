@@ -1,0 +1,42 @@
+﻿@page "/"
+
+@using VideoTest.Models
+@using Microsoft.Extensions.Options
+@using VideoTest.Services
+@inject IStreamApiService StreamService
+@inject IOptions<ApiOptions> Options
+@inject ILogger<Home> Logger
+
+<PageTitle>Stream</PageTitle>
+
+@if (_errorMessage != null)
+{
+	<p>@_errorMessage</p>
+}
+else
+{
+	@foreach (var channel in _channels)
+	{
+		<img src="/stream?channelId=@channel.Id"/>
+	}
+}
+
+@code {
+	private string? _errorMessage;
+	private List<Channel> _channels = [];
+
+	protected override async Task OnInitializedAsync()
+	{
+		try
+		{
+			var channels = await StreamService.GetActiveChannelsAsync();
+
+			_channels = channels.Take(Options.Value.StreamsCount).ToList();
+		}
+		catch(Exception ex)
+		{
+			Logger.LogError(ex, "Не удалось получить список камер от с сервера");
+			_errorMessage = "Не удалось получить список камер от сервера. Обновите страницу";
+		}
+	}
+}
