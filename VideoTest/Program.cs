@@ -16,7 +16,10 @@ namespace VideoTest
 
             builder.Services.AddRazorComponents();
 
-            builder.Services.Configure<ApiOptions>(builder.Configuration.GetSection(ApiOptions.SectionName));
+            builder.Services.AddOptions<ApiOptions>()
+                .BindConfiguration(ApiOptions.SectionName)
+                .ValidateDataAnnotations()
+                .ValidateOnStart();
 
             builder.Services.AddHttpClient<IStreamApiService, StreamApiService>((sp, client) => 
             {

@@ -6,6 +6,6 @@ namespace VideoTest.Services
     {
         Task<List<Channel>> GetActiveChannelsAsync();
 
-        Task<HttpResponseMessage> OpenStreamAsync(Guid channeldId, CancellationToken cancelToken);
+        Task<HttpResponseMessage> OpenStreamAsync(Guid channelId, CancellationToken cancelToken);
     }
 }

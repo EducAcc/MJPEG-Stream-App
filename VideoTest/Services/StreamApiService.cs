@@ -1,11 +1,10 @@
-﻿using Microsoft.Extensions.Options;
-using VideoTest.Models;
+﻿using VideoTest.Models;
 
 namespace VideoTest.Services
 {
     public class StreamApiService : IStreamApiService
     {
-        private HttpClient _httpClient;
+        private readonly HttpClient _httpClient;
 
         public StreamApiService(HttpClient httpClient)
         {
@@ -18,7 +17,7 @@ namespace VideoTest.Services
 
             ConfigexResponse? response = await _httpClient.GetFromJsonAsync<ConfigexResponse>(configUrl);
             
-            if (response == null && response.Channels == null)
+            if (response == null || response.Channels == null)
             {
                 return [];
             }
@@ -28,9 +27,9 @@ namespace VideoTest.Services
                 .ToList();
         }
 
-        public async Task<HttpResponseMessage> OpenStreamAsync(Guid camId, CancellationToken cancelToken)
+        public async Task<HttpResponseMessage> OpenStreamAsync(Guid channelId, CancellationToken cancelToken)
         {
-            string videoUrl = $"/mobile?channelId={camId}";
+            string videoUrl = $"/mobile?channelId={channelId}";
 
             return await _httpClient.GetAsync(videoUrl, HttpCompletionOption.ResponseHeadersRead, cancelToken);
         }

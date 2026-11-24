@@ -13,6 +13,10 @@
 {
 	<p>@_errorMessage</p>
 }
+else if (_channels.Count == 0)
+{
+	<p>Нет камер, доступных для просмотра</p>
+}
 else
 {
 	@foreach (var channel in _channels)
